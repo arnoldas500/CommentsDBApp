@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "moment": "^2.20.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-safari-view": "^2.0.0",

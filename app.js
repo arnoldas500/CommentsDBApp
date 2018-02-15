@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './Components/login';
-import Comments from './Components/comments/list';
+import Login from './components/login';
+import Comments from './components/comments/list';
 
 export default class App extends Component {
 
