@@ -1,0 +1,21 @@
+import mongoose from 'mongoose';
+import Data from './models/barcodeData';
+
+const bcData = [
+  {
+    title: 'La La Land',
+    poster: 'https://i.imgur.com/po7UezG.jpg',
+    genre: 'Drama/Romance',
+  },
+];
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/bcData');
+
+// Go through each movie
+movies.map(data => {
+  // Initialize a model with movie data
+  const movie = new Movie(data);
+  // and save it into the database
+  movie.save();
+});

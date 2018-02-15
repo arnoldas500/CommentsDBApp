@@ -1,0 +1,40 @@
+done(null, await createOrGetUserFromDatabase(transformFacebookProfile(profile._json)))
+));
+
+// Register Google Passport strategy
+passport.use(new GoogleStrategy(google,
+				async (accessToken, refreshToken, profile, done)
+				=> done(null, await createOrGetUserFromDatabase(transformGoogleProfile(profile._json)))
+			       ));
+
+const createOrGetUserFromDatabase = async (userProfile) => {
+    let user = await User.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
+    if (!user) {
+	user = new User({
+	    oauth_id: userProfile.oauth_id,
+	    name: userProfile.name,
+	    avatar: userProfile.avatar,
+	});
+	await user.save();
+    }
+    return user;
+};
+
+// Serialize user into the sessions
+passport.serializeUser((user, done) => done(null, user));
+
+// Deserialize user from the sessions
+passport.deserializeUser((user, done) => done(null, user));
+
+// Facebook
+export const facebookLogin = passport.authenticate('facebook');
+export const facebookMiddleware = passport.authenticate('facebook', { failureRedirect: '/auth/facebook' });
+
+// Google
+export const googleLogin = passport.authenticate('google', { scope: ['profile'] });
+export const googleMiddleware = passport.authenticate('google', { failureRedirect: '/auth/google' });
+
+// Callback
+export const oauthCallback = async (req, res) => {
+    res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user));
+};
