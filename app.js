@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Login from './components/login';
 import Comments from './components/comments/list';
+import {
+  AppRegistry
+} from 'react-native';
 
 export default class App extends Component {
 

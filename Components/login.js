@@ -4,10 +4,15 @@ import {
   StyleSheet,
   Platform,
   Text,
-  View
+  View,
+  TextInput,
+  ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
+import Container from '../components/Container';
+import Button from '../components/Button';
+import Label from '../components/Label';
 
 export default class Login extends Component {
 
@@ -65,21 +70,67 @@ export default class Login extends Component {
     }
   };
 
+  press() {
+    //execute any code here
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+<View style={styles.container}>
+
+      <ScrollView style={styles.scroll}>
+      <Container>
+  <Button
+      label="Forgot Login/Pass"
+      styles={{button: styles.alignRight, label: styles.label}}
+      onPress={this.press.bind(this)} />
+</Container>
+
+<Container>
+    <Label text="Username or Email" />
+    <TextInput
+        style={styles.textInput}
+    />
+</Container>
+<Container>
+    <Label text="Password" />
+    <TextInput
+        secureTextEntry={true}
+        style={styles.textInput}
+    />
+</Container>
+        </ScrollView>
+
+        <View style={styles.footer}>
+            <Container>
+                <Button
+                    label="Sign In"
+                    styles={{button: styles.primaryButton, label: styles.buttonWhiteText}}
+                    onPress={this.press.bind(this)} />
+            </Container>
+            <Container>
+                <Button
+                    label="CANCEL"
+                    styles={{label: styles.buttonBlackText}}
+                    onPress={this.press.bind(this)} />
+            </Container>
+        </View>
 
         <View style={styles.content}>
-          <Text style={styles.header}>
-            Welcome Stranger!
-          </Text>
+          {
+          //   <Text style={styles.header}>
+          //   Welcome Stranger!
+          // </Text>
+        }
           <View style={styles.avatar}>
             <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
           </View>
-          <Text style={styles.text}>
-            Please log in to continue {'\n'}
-            to the awesomness
-          </Text>
+          {
+          // <Text style={styles.text}>
+          //   Please log in to continue {'\n'}
+          //   to the awesomness
+          // </Text>
+        }
         </View>
 
         <View style={styles.buttons}>
@@ -112,6 +163,40 @@ const iconStyles = {
 };
 
 const styles = StyleSheet.create({
+  scroll: {
+    padding: 10,
+    flexDirection: 'column'
+},
+textInput: {
+    height: 30,
+    fontSize: 10,
+    backgroundColor: '#FFF'
+},
+label: {
+    color: '#0d8898',
+    fontSize: 7
+},
+alignRight: {
+    alignSelf: 'flex-end'
+},
+buttonWhiteText: {
+    fontSize: 10,
+    color: '#FFF',
+},
+buttonBlackText: {
+    fontSize: 10,
+    color: '#595856'
+},
+primaryButton: {
+    backgroundColor: '#34A853'
+},
+footer: {
+   marginTop: 0
+},
+
+
+
+
   container: {
     flex: 1,
     backgroundColor: '#FFF',
